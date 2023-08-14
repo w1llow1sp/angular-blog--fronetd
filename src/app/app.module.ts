@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LoginComponent,
     HomeComponent,
     PostComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
