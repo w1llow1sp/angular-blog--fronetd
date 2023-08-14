@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { PostService } from '../../services/post.service';
 import { Router } from '@angular/router';
 import { CommonService } from '../../services/common.service';
+import {Post} from '../../models/post.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +12,10 @@ import { CommonService } from '../../services/common.service';
 })
 export class DashboardComponent implements OnInit {
   posts: any[] = [];
+  postToDelete: Post = new Post('', '');
   @ViewChild('addPost') addBtn!: ElementRef;
   @ViewChild('editPost') editBtn!: ElementRef;
+  @ViewChild('deletePost') deleteBtn!: ElementRef;
 
   constructor(
     private postService: PostService,
@@ -23,6 +26,10 @@ export class DashboardComponent implements OnInit {
     this.commonService.postToEdit_Observable.subscribe(res => {
       this.editBtn.nativeElement.click();
     });
+    this.commonService.postToDelete_Observable.subscribe(res => {
+      this.postToDelete = this.commonService.postToDelete;
+      this.deleteBtn.nativeElement.click();
+    })
   }
 
   ngOnInit() {
@@ -50,5 +57,8 @@ export class DashboardComponent implements OnInit {
     this.auth.logout();
     this.router.navigate(['']);
   }
+  delete() {
+    console.log(this.postToDelete);}
 
-}
+
+  }
