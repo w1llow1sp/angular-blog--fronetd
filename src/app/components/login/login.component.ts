@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { User } from '../../models/user.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router:Router
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -43,7 +45,13 @@ export class LoginComponent implements OnInit {
     this.user = new User(this.f['username'].value, this.f['password'].value);
 
     this.loginService.login( this.user ).subscribe({
-      next: (result) => console.log(result),
+      next: (result:any) => {
+        if (result['status'] === 'success') {
+          this.router.navigate(['/home'])
+        } else {
+          this.error = 'Wrong username or password'
+        }
+      },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
     });
