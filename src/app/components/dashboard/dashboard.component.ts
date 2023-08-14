@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('addPost') addBtn!: ElementRef;
   @ViewChild('editPost') editBtn!: ElementRef;
   @ViewChild('deletePost') deleteBtn!: ElementRef;
+  @ViewChild('cancelBtn') cancelBtn!: ElementRef;
 
   constructor(
     private postService: PostService,
@@ -60,8 +61,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['']);
   }
   delete() {
-    this.addPostService.deletePost(this.postToDelete).subscribe( (res) => {
-      this.getPosts()
+    this.addPostService.deletePost(this.postToDelete).subscribe(
+      (res) => {
+      this.getPosts();
+      this.cancelBtn.nativeElement.click()
     })
   }
 
