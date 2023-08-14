@@ -6,7 +6,9 @@
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sign out</a>
+      <button class="btn btn-outline-primary" (click)="logout()">
+        Logout
+      </button>
     </li>
   </ul>
 </nav>
@@ -42,10 +44,6 @@
           <div class="btn-group mr-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Add Post</button>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
         </div>
       </div>
 

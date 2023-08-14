@@ -1,5 +1,7 @@
-import { Component ,OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PostService} from '../../services/post.service';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -9,17 +11,28 @@ import {PostService} from '../../services/post.service';
 })
 export class DashboardComponent implements OnInit {
   posts: any[] = [];
-  constructor(private postService:PostService) {}
+
+  constructor(private postService: PostService,
+              private auth:AuthService,
+              private router:Router) {
+  }
+
   ngOnInit() {
     this.getPosts()
   }
+
   getPosts() {
     this.postService.getPostsByAuthor().subscribe({
-      next:(result:any) => {
+      next: (result: any) => {
         this.posts = result['data'];
         console.log(this.posts)
       }
     })
   }
+  logout () {
+    this.auth.logout();
+    this.router.navigate([''])
+  }
+
 
 }
