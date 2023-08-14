@@ -46,7 +46,7 @@ export class AddPostComponent implements OnInit {
     if (this.postForm.invalid) {
       return;
     }
-    this.post.setText(this.f['title'].value);
+    this.post.setTitle(this.f['title'].value);
     this.post.setText(this.f['text'].value);
     if (this.post.getId() === '') {
       this.addPostService.addPost(this.post).subscribe({
