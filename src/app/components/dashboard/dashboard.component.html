@@ -51,7 +51,7 @@
 
       <h2 class="border-bottom text-center">My Posts</h2>
       <div *ngFor="let post of posts">
-        <app-post [post]="post"></app-post>
+        <app-post [post]="post" [read]="false" [admin]="true"></app-post>
       </div>
     </main>
   </div>
