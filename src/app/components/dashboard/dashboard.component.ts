@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
     this.getPosts()
   }
   getPosts() {
-    this.postService.getAllPost().subscribe({
+    this.postService.getPostsByAuthor().subscribe({
       next:(result:any) => {
         this.posts = result['data'];
         console.log(this.posts)
