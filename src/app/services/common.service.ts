@@ -1,27 +1,45 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-/**@Библиотека rxjs  (Reactive Extensions for JavaScript) предоставляет набор инструментов для работы с асинхронными и потоковыми операциями в JavaScript. Она предоставляет множество классов и операторов для создания, преобразования и комбинирования потоков данных.
- * В данном конкретном случае, код импортирует класс  Subject  из библиотеки  rxjs .  Subject  является типом Observable, который может быть использован для создания и отправки потоков данных (событий) между различными частями приложения. Он может иметь несколько подписчиков, которые могут получать и обрабатывать эти события.
- *
- * Таким образом, импорт  Subject  из  rxjs  позволяет использовать этот класс для создания и управления потоками данных в приложении. В коде выше,  Subject  используется в сервисе  CommonService  для оповещения о добавлении нового поста, отправляя сообщение о добавлении через метод  next() . */
-
+import { Post } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
 })
-/**@1. Импортирует необходимые модули  Injectable  из  @angular/core  и  Subject  из  rxjs
- * @2. Определяет класс  CommonService  и аннотирует его как инжектируемый сервис, доступный в корневом модуле приложения.
- * @3.Создает объект  postAdded_Observer  типа  Subject , который будет использоваться для оповещения о добавлении нового поста. *
- * @4.  Определяет метод  notifyPostAddition , который принимает строковый аргумент  msg  и вызывает метод  next  у объекта  postAdded_Observer , передавая ему значение  msg .
- * */
-
 export class CommonService {
-  public postAdded_Observer = new Subject()
 
-  constructor() { }
+  public postAdded_Observable = new Subject();
+  public postToEdit_Observable = new Subject();
 
-  notifyPostAddition(msg:string){
-    this.postAdded_Observer.next(msg)
+  postToEdit: Post = new Post('', '');
+  public postToAdd_Observable = new Subject();
+
+  constructor() {
+
   }
+
+  notifyPostAddition(msg: string) {
+    this.postAdded_Observable.next(msg);
+  }
+
+  notifyPostEdit(msg: string) {
+    this.postToEdit_Observable.next(msg);
+  }
+
+  setPostToEdit(post: any) {
+    this.postToEdit = new Post(post.title, post.text);
+    this.postToEdit.setId(post._id);
+    this.notifyPostEdit('');
+  }
+
+  notifyPostToAdd(msg: string) {
+    this.postToAdd_Observable.next(msg);
+  }
+
+  setPostToAdd() {
+    this.postToEdit = new Post('', '');
+    this.postToEdit.setId('');
+    this.notifyPostToAdd('');
+  }
+
 }
 

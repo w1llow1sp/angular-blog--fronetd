@@ -7,15 +7,27 @@ import { Post } from '../models/post.model';
 })
 export class AddPostService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  addPost(post:Post) {
+  addPost(post: Post) {
     const user = JSON.parse(localStorage.getItem('currentUser') as string);
 
-    return this.http.post('/api/post/createPost',{
-      title:post.getTitle(),
-      text:post.getText(),
-      author_id:user.id
-    })
+    return this.http.post('/api/post/createPost', {
+      title : post.getTitle(),
+      text : post.getText(),
+      author_id: user.id
+    });
+  }
+
+  updatePost(post: Post) {
+    console.log(post);
+    const user = JSON.parse(localStorage.getItem('currentUser') as string);
+
+    return this.http.post('/api/post/updatePost', {
+      id: post.getId(),
+      title : post.getTitle(),
+      text : post.getText(),
+      author_id: user.id
+    });
   }
 }
