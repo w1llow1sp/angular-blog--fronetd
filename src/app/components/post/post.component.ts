@@ -20,5 +20,8 @@ export class PostComponent implements OnInit {
     this.commonService.setPostToEdit(post);
   }
 
+  setPostToDelete(post: any) {
+    this.commonService.setPostToDelete(post);
+  }
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {Post} from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,4 +18,5 @@ export class PostService {
     return this.http.post('/api/post/getPostsByAuthor',
       { author_id: currentUser.id });
   }
+
 }

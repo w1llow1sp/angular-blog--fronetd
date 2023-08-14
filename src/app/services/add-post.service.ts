@@ -30,4 +30,9 @@ export class AddPostService {
       author_id: user.id
     });
   }
+  deletePost(post:Post) {
+    return this.http.post('api/post/deletePost', {
+      id:post.getId()
+    })
+  }
 }

@@ -1,8 +1,8 @@
 <div class="text-right" *ngIf="admin">
   <i title="Edit" (click)="setPostToEdit(post)" class="fas fa-edit" aria-hidden="true"
      style="cursor: pointer"></i>
-  <i title="Delete" class="fas fa-trash-alt" aria-hidden="true"
-     style="cursor: pointer"></i>
+  <i title="Delete" (click)="setPostToDelete(post)"
+     class="fas fa-trash-alt" aria-hidden="true" style="cursor: pointer"> </i>
 </div>
 <h2 class="blog-post-title">{{ post.title }}</h2>
 <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>

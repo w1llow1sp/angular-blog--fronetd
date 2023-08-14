@@ -4,6 +4,7 @@ import { PostService } from '../../services/post.service';
 import { Router } from '@angular/router';
 import { CommonService } from '../../services/common.service';
 import {Post} from '../../models/post.model';
+import {AddPostService} from '../../services/add-post.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit {
     private postService: PostService,
     private auth: AuthService,
     private router: Router,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private addPostService:AddPostService
   ) {
     this.commonService.postToEdit_Observable.subscribe(res => {
       this.editBtn.nativeElement.click();
@@ -58,7 +60,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['']);
   }
   delete() {
-    console.log(this.postToDelete);}
+    this.addPostService.deletePost(this.postToDelete).subscribe( (res) => {
+      this.getPosts()
+    })
+  }
 
 
   }
