@@ -1,4 +1,5 @@
 export class User {
+  private id ='';
   private username = '';
   private password = '';
   constructor(username: string, password: string) {
@@ -10,5 +11,11 @@ export class User {
   }
   getPassword () {
     return this.password
+  }
+  setId(id:string) {
+    this.id = id
+  }
+  getId() {
+    return this.id
   }
 }
