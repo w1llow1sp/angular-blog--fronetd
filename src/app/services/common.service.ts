@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Post } from '../models/post.model';
+import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,17 @@ export class CommonService {
   public postToAdd_Observable = new Subject();
   public postToEdit_Observable = new Subject();
   public postToDelete_Observable = new Subject();
+  public postToAddAuthor_Observable = new Subject()
 
 
   postToEdit: Post = new Post('', '');
   postToDelete: Post = new Post('', '');
+  postToAddAuthor: Post = new Post('', '');
 
 
-  constructor() {
+  constructor(
+    private localStorageService: LocalStorageService
+  ) {
 
   }
 
@@ -27,6 +32,9 @@ export class CommonService {
 
   notifyPostEdit(msg: string) {
     this.postToEdit_Observable.next(msg);
+  }
+  notifyPostAuthor(msg:string) {
+    this.postToAddAuthor_Observable.next(msg)
   }
 
   setPostToEdit(post: any) {
@@ -52,6 +60,24 @@ export class CommonService {
     this.postToDelete.setId(post._id);
     this.notifyPostDelete('');
   }
+  getUsernameByAuthorId(authorId:string) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+    if (currentUser.id === authorId) {
+      return 'You';
+    }
+    const data = JSON.parse(this.localStorageService.getDataFromLocalStorage('data'));
+    const author = data.find((item: any) => item.id === authorId);
+    return author ? author.username.toString() : '';
+  }
+  getCurrentDateString() {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const date = new Date();
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${month} ${day}, ${year}`;
+  }
+
 
 }
 

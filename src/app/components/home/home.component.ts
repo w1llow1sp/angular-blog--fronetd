@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {PostService} from '../../services/post.service';
-import {LocalStorageService} from '../../services/local-storage.service';
+import {CommonService} from '../../services/common.service';
+
 
 @Component({
   selector: 'app-home',
@@ -16,8 +17,8 @@ export class HomeComponent {
   constructor(
     public authService: AuthService,
     public router: Router,
-    private postService: PostService,
-    private localStore:LocalStorageService) {
+    public commonService:CommonService,
+    private postService: PostService) {
   }
 
   logout() {
@@ -35,8 +36,9 @@ export class HomeComponent {
   }
 
   parseUsername() {
-    return this.username = this.localStore.getDataFromLocalStorage('username').replace(/"/g, '')
+    return this.username = this.postService.getCurrentUsername().replace(/"/g, '')
   }
+
 
   ngOnInit() {
     this.getPosts();

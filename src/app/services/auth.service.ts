@@ -8,7 +8,9 @@ import {LocalStorageService} from './local-storage.service';
 })
 export class AuthService {
 
-  constructor(private http : HttpClient,private localStore:LocalStorageService) {
+  constructor(
+    private http : HttpClient,
+    private localStore:LocalStorageService) {
   }
 
   login(user: User) {
@@ -24,8 +26,7 @@ export class AuthService {
       username:user.getUserName()
     }
     localStorage.setItem('currentUser',JSON.stringify(loggedInUser))
-    this.localStore.saveDataFromLocalStorage(loggedInUser.username,JSON.stringify(loggedInUser.username))
-
+    this.localStore.checkAndAddDataToStorage(loggedInUser.id,loggedInUser.username)
 
   }
   isAuthenticated(){

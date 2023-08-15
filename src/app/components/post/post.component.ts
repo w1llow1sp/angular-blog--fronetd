@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CommonService } from '../../services/common.service';
+import {Component, OnInit, Input} from '@angular/core';
+import {CommonService} from '../../services/common.service';
+import {Post} from '../../models/post.model';
+
 
 @Component({
   selector: 'app-post',
@@ -11,9 +13,13 @@ export class PostComponent implements OnInit {
   @Input() read = true;
   @Input() admin = false;
 
-  constructor(private commonService: CommonService) {}
+  public authorName = '';
+
+  constructor(private commonService: CommonService) {
+  }
 
   ngOnInit() {
+    this.getUsernameByAuthorIdNew(this.post.author_id)
   }
 
   setPostToEdit(post: any) {
@@ -23,5 +29,11 @@ export class PostComponent implements OnInit {
   setPostToDelete(post: any) {
     this.commonService.setPostToDelete(post);
   }
+
+  getUsernameByAuthorIdNew(id:string){
+    this.authorName = this.commonService.getUsernameByAuthorId(id)
+  }
+
+
 
 }
