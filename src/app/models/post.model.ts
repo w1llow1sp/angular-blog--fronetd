@@ -8,6 +8,7 @@ export class Post {
   constructor(title: string, text: string) {
     this.title = title;
     this.text = text;
+
   }
 
   getTitle() {
@@ -41,6 +42,13 @@ export class Post {
     return this.date
   }
   setDate() {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const date = new Date();
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const dateString = `${month} ${day}, ${year}`;
+    this.date = dateString;
     return this.date
   }
 }

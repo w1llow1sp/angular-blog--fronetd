@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {CommonService} from '../../services/common.service';
-import {Post} from '../../models/post.model';
+
 
 
 @Component({
@@ -14,12 +14,14 @@ export class PostComponent implements OnInit {
   @Input() admin = false;
 
   public authorName = '';
+  public date = '';
 
   constructor(private commonService: CommonService) {
   }
 
   ngOnInit() {
     this.getUsernameByAuthorIdNew(this.post.author_id)
+    this.getDatePost(this.post)
   }
 
   setPostToEdit(post: any) {
@@ -34,6 +36,10 @@ export class PostComponent implements OnInit {
     this.authorName = this.commonService.getUsernameByAuthorId(id)
   }
 
+  getDatePost (post: any) {
+    this.date = this.commonService.getPostCreatedDate(post)
+    console.log(this.date)
+  }
 
 
 }

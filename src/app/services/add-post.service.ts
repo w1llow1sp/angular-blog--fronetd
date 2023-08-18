@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,8 @@ export class AddPostService {
     return this.http.post('/api/post/createPost', {
       title : post.getTitle(),
       text : post.getText(),
-      author_id: user.id
+      author_id: user.id,
+      date: post.setDate()
     });
   }
 
@@ -27,6 +29,7 @@ export class AddPostService {
       id: post.getId(),
       title : post.getTitle(),
       text : post.getText(),
+      date:post.getPostDate(),
       author_id: user.id
     });
   }
