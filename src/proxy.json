@@ -1,7 +1,7 @@
 {
   "/api/*": {
 
-    "target": "http://localhost:6010",
+    "target": "https://angular-blog-backend.onrender.com",
     "secure": "false"
   }
 }
